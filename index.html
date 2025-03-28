@@ -59,7 +59,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
+        <h2 id="titulo">💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
         
         <!-- Sección del input y botón -->
         <div id="loginSection">
@@ -84,6 +84,7 @@
             if (claveIngresada === claveCorrecta) {
                 document.getElementById("mensaje").classList.remove("hidden"); // Muestra el mensaje
                 document.getElementById("loginSection").classList.add("hidden"); // Oculta el input y botón
+                document.getElementById("titulo").classList.add("hidden"); // Oculta el título
                 
                 // Detectar si es móvil o PC y ajustar el enlace de WhatsApp
                 var whatsappLink = document.getElementById("whatsappLink");
