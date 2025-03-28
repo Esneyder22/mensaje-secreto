@@ -14,7 +14,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-image: url('https://imgur.com/a/AuqwExH');
+            background-image: url('https://drive.google.com/uc?export=view&id=1JLWPrVPWuqmWyxE2eTG1xMaMjVIKb-5b'); /* Imagen de fondo */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -29,9 +29,30 @@
             padding: 20px;
             border-radius: 10px;
         }
-        input, button {
+        input {
             padding: 10px;
             margin-top: 10px;
+            text-align: center;
+            font-size: 16px;
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid white;
+            border-radius: 5px;
+            outline: none;
+        }
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.5); /* Color clarito */
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            margin-top: 10px;
+            border: none;
+            background-color: #25D366;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         a {
             color: #25D366;
@@ -42,8 +63,14 @@
 <body>
     <div class="container">
         <h2>💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
-        <input type="password" id="password" placeholder="DDMMAAAA">
-        <button onclick="verificarClave()">Ingresar</button>
+        
+        <!-- Sección del input y botón -->
+        <div id="loginSection">
+            <input type="password" id="password" value="DDMMAAAA" onfocus="limpiarInput()" onblur="restaurarInput()">
+            <button onclick="verificarClave()">Ingresar</button>
+        </div>
+        
+        <!-- Mensaje oculto -->
         <div id="mensaje" class="hidden">
             <h3>My Chatica</h3>
             <p>Te extraño demasiado, ¿Podemos Hablar? 💜💚</p>
@@ -59,9 +86,26 @@
             var claveCorrecta = "17022024"; 
             
             if (claveIngresada === claveCorrecta) {
-                document.getElementById("mensaje").classList.remove("hidden");
+                document.getElementById("mensaje").classList.remove("hidden"); // Muestra el mensaje
+                document.getElementById("loginSection").classList.add("hidden"); // Oculta el input y botón
             } else {
                 alert("Clave incorrecta. Inténtalo de nuevo.");
+            }
+        }
+
+        function limpiarInput() {
+            var input = document.getElementById("password");
+            if (input.value === "DDMMAAAA") {
+                input.value = "";
+                input.style.color = "white";
+            }
+        }
+
+        function restaurarInput() {
+            var input = document.getElementById("password");
+            if (input.value === "") {
+                input.value = "DDMMAAAA";
+                input.style.color = "rgba(255, 255, 255, 0.5)"; // Color clarito
             }
         }
     </script>
