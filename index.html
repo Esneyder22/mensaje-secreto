@@ -44,17 +44,14 @@
             border-radius: 5px;
             outline: none;
         }
-        .input-label {
+        /* Siempre mostrar el texto "DDMMAAAA" dentro del input */
+        input::before {
+            content: "DDMMAAAA";
             position: absolute;
             left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-            color: rgba(255, 255, 255, 0.5); /* Color clarito */
-            pointer-events: none;
-        }
-        input:focus + .input-label,
-        input:not(:placeholder-shown) + .input-label {
-            display: none;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 16px;
         }
         button {
             padding: 10px 20px;
@@ -78,8 +75,7 @@
         
         <!-- Input con formato permanente -->
         <div class="input-container">
-            <input type="password" id="password" placeholder=" " onfocus="mostrarTexto()" onblur="ocultarTexto()">
-            <span class="input-label">DDMMAAAA</span>
+            <input type="password" id="password" value="DDMMAAAA" onfocus="limpiarCampo()" onblur="restaurarTexto()">
         </div>
         <button onclick="verificarClave()">Ingresar</button>
         
@@ -106,16 +102,22 @@
             }
         }
 
-        function mostrarTexto() {
-            document.querySelector(".input-label").style.display = "none";
+        function limpiarCampo() {
+            var input = document.getElementById("password");
+            if (input.value === "DDMMAAAA") {
+                input.value = "";
+                input.style.color = "white"; // Texto normal
+            }
         }
 
-        function ocultarTexto() {
+        function restaurarTexto() {
             var input = document.getElementById("password");
             if (input.value === "") {
-                document.querySelector(".input-label").style.display = "block";
+                input.value = "DDMMAAAA";
+                input.style.color = "rgba(255, 255, 255, 0.5)"; // Texto clarito
             }
         }
     </script>
 </body>
 </html>
+
