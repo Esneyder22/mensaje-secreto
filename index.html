@@ -29,6 +29,10 @@
             padding: 20px;
             border-radius: 10px;
         }
+        .input-container {
+            position: relative;
+            display: inline-block;
+        }
         input {
             padding: 10px;
             margin-top: 10px;
@@ -40,9 +44,17 @@
             border-radius: 5px;
             outline: none;
         }
-        input::placeholder {
+        .input-label {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
             color: rgba(255, 255, 255, 0.5); /* Color clarito */
-            text-align: center;
+            pointer-events: none;
+        }
+        input:focus + .input-label,
+        input:not(:placeholder-shown) + .input-label {
+            display: none;
         }
         button {
             padding: 10px 20px;
@@ -64,11 +76,12 @@
     <div class="container">
         <h2>💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
         
-        <!-- Sección del input y botón -->
-        <div id="loginSection">
-            <input type="password" id="password" value="DDMMAAAA" onfocus="limpiarInput()" onblur="restaurarInput()">
-            <button onclick="verificarClave()">Ingresar</button>
+        <!-- Input con formato permanente -->
+        <div class="input-container">
+            <input type="password" id="password" placeholder=" " onfocus="mostrarTexto()" onblur="ocultarTexto()">
+            <span class="input-label">DDMMAAAA</span>
         </div>
+        <button onclick="verificarClave()">Ingresar</button>
         
         <!-- Mensaje oculto -->
         <div id="mensaje" class="hidden">
@@ -87,25 +100,20 @@
             
             if (claveIngresada === claveCorrecta) {
                 document.getElementById("mensaje").classList.remove("hidden"); // Muestra el mensaje
-                document.getElementById("loginSection").classList.add("hidden"); // Oculta el input y botón
+                document.querySelector(".input-container").classList.add("hidden"); // Oculta el input y botón
             } else {
                 alert("Clave incorrecta. Inténtalo de nuevo.");
             }
         }
 
-        function limpiarInput() {
-            var input = document.getElementById("password");
-            if (input.value === "DDMMAAAA") {
-                input.value = "";
-                input.style.color = "white";
-            }
+        function mostrarTexto() {
+            document.querySelector(".input-label").style.display = "none";
         }
 
-        function restaurarInput() {
+        function ocultarTexto() {
             var input = document.getElementById("password");
             if (input.value === "") {
-                input.value = "DDMMAAAA";
-                input.style.color = "rgba(255, 255, 255, 0.5)"; // Color clarito
+                document.querySelector(".input-label").style.display = "block";
             }
         }
     </script>
