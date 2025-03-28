@@ -8,29 +8,55 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin: 50px;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url('https://imgur.com/a/AuqwExH');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            text-shadow: 2px 2px 5px black;
         }
         .hidden {
             display: none;
         }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        input, button {
+            padding: 10px;
+            margin-top: 10px;
+        }
+        a {
+            color: #25D366;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-    <h2>💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
-    <input type="password" id="password" placeholder="DDMMAAAA">
-    <button onclick="verificarClave()">Ingresar</button>
-    <div id="mensaje" class="hidden">
-        <h3>My Chatica</h3>
-        <p>Te extraño demasiado, Podemos Hablar💜💚</p>
-   <div>
-    <p>Si tu respuesta es sí, envíame un mensaje a mi <a href="https://wa.me/+573142020486" target="_blank">WhatsApp</a>.</p>
-</div>
-
+    <div class="container">
+        <h2>💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
+        <input type="password" id="password" placeholder="DDMMAAAA">
+        <button onclick="verificarClave()">Ingresar</button>
+        <div id="mensaje" class="hidden">
+            <h3>My Chatica</h3>
+            <p>Te extraño demasiado, ¿Podemos Hablar? 💜💚</p>
+            <p>Si tu respuesta es sí, envíame un mensaje a mi 
+                <a href="https://wa.me/+573142020486" target="_blank">WhatsApp</a>.
+            </p>
+        </div>
+    </div>
 
     <script>
         function verificarClave() {
             var claveIngresada = document.getElementById("password").value;
-            var claveCorrecta = "17022024"; // Reemplázala con tu fecha real en formato DDMMAAAA
+            var claveCorrecta = "17022024"; 
             
             if (claveIngresada === claveCorrecta) {
                 document.getElementById("mensaje").classList.remove("hidden");
