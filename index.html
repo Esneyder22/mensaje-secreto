@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensaje Secreto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h2>💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
+    <input type="password" id="password" placeholder="DDMMAAAA">
+    <button onclick="verificarClave()">Ingresar</button>
+    <div id="mensaje" class="hidden">
+        <h3>Gracias por ingresar</h3>
+        <p>Te extraño demasiado, Podemos Hablar💜💚</p>
+        <img src="URL_DE_TU_IMAGEN" alt="Imagen secreta" width="300">
+    </div>
+
+    <script>
+        function verificarClave() {
+            var claveIngresada = document.getElementById("password").value;
+            var claveCorrecta = "17022024"; // Reemplázala con tu fecha real en formato DDMMAAAA
+            
+            if (claveIngresada === claveCorrecta) {
+                document.getElementById("mensaje").classList.remove("hidden");
+            } else {
+                alert("Clave incorrecta. Inténtalo de nuevo.");
+            }
+        }
+    </script>
+</body>
+</html>
