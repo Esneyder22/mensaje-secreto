@@ -5,6 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mensaje Secreto</title>
     <style>
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -14,79 +25,122 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-image: url('https://drive.google.com/uc?export=view&id=1JLWPrVPWuqmWyxE2eTG1xMaMjVIKb-5b'); /* Imagen de fondo */
+            background-image: url('https://i.imgur.com/UvFJVfe.jpeg'); /* Imagen de fondo */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             color: white;
             text-shadow: 2px 2px 5px black;
         }
+
         .hidden {
             display: none;
         }
+
         .container {
             background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
-            border-radius: 10px;
+            padding: 30px;
+            border-radius: 15px;
+            animation: fadeIn 1s ease-in-out;
         }
-        .input-container {
-            position: relative;
-            display: inline-block;
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            animation: fadeIn 1.5s ease-in-out;
         }
+
+        h3 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #8A2BE2; /* Morado */
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        p {
+            font-size: 22px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
         input {
-            padding: 10px;
+            padding: 12px;
             margin-top: 10px;
             text-align: center;
-            font-size: 16px;
+            font-size: 18px;
             color: white;
-            background-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.2);
             border: 1px solid white;
             border-radius: 5px;
-            outline: none;
         }
-        /* Siempre mostrar el texto "DDMMAAAA" dentro del input */
-        input::before {
-            content: "DDMMAAAA";
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            color: rgba(255, 255, 255, 0.5);
-            font-size: 16px;
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 18px;
         }
+
         button {
-            padding: 10px 20px;
-            margin-top: 10px;
-            border: none;
+            padding: 12px 20px;
+            margin-top: 15px;
             background-color: #25D366;
             color: white;
-            font-size: 16px;
-            border-radius: 5px;
+            border: none;
             cursor: pointer;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
-        a {
-            color: #25D366;
+
+        button:hover {
+            background-color: #1da851;
+            transform: scale(1.1);
+        }
+
+        /* Botón atractivo de WhatsApp */
+        .whatsapp-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 25px;
+            background-color: #25D366;
+            color: white;
+            font-size: 22px;
             font-weight: bold;
+            text-decoration: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+            border: 2px solid white;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .whatsapp-button:hover {
+            background-color: #1da851;
+            transform: scale(1.1);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Ajuste para subir el mensaje 10cm (100px) más arriba */
+        #mensaje {
+            margin-top: -100px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
+    <div class="container" id="loginContainer">
+        <h2 id="titulo">💜Soy Kiwi, pon la fecha de nuestro Noviazgo, Porfa💚</h2>
         
-        <!-- Input con formato permanente -->
-        <div class="input-container">
-            <input type="password" id="password" value="DDMMAAAA" onfocus="limpiarCampo()" onblur="restaurarTexto()">
+        <!-- Sección del input y botón -->
+        <div id="loginSection">
+            <input type="password" id="password" placeholder="DDMMAAAA">
+            <button onclick="verificarClave()">Ingresar</button>
         </div>
-        <button onclick="verificarClave()">Ingresar</button>
-        
-        <!-- Mensaje oculto -->
-        <div id="mensaje" class="hidden">
-            <h3>My Chatica</h3>
-            <p>Te extraño demasiado, ¿Podemos Hablar? 💜💚</p>
-            <p>Si tu respuesta es sí, envíame un mensaje a mi 
-                <a href="https://wa.me/+573142020486" target="_blank">WhatsApp</a>.
-            </p>
-        </div>
+    </div>
+
+    <!-- Mensaje oculto -->
+    <div id="mensaje" class="hidden">
+        <h3>My Chatica</h3>
+        <p>Te extraño demasiado, ¿Podemos Hablar? 💜💚</p>
+        <p>Si tu respuesta es sí, envíame un mensaje a mi:</p>
+
+        <a href="https://wa.me/+573142020486" target="_blank" class="whatsapp-button">WhatsApp</a>
     </div>
 
     <script>
@@ -96,28 +150,13 @@
             
             if (claveIngresada === claveCorrecta) {
                 document.getElementById("mensaje").classList.remove("hidden"); // Muestra el mensaje
-                document.querySelector(".input-container").classList.add("hidden"); // Oculta el input y botón
+                document.getElementById("loginContainer").classList.add("hidden"); // Oculta todo el login
             } else {
                 alert("Clave incorrecta. Inténtalo de nuevo.");
-            }
-        }
-
-        function limpiarCampo() {
-            var input = document.getElementById("password");
-            if (input.value === "DDMMAAAA") {
-                input.value = "";
-                input.style.color = "white"; // Texto normal
-            }
-        }
-
-        function restaurarTexto() {
-            var input = document.getElementById("password");
-            if (input.value === "") {
-                input.value = "DDMMAAAA";
-                input.style.color = "rgba(255, 255, 255, 0.5)"; // Texto clarito
             }
         }
     </script>
 </body>
 </html>
+
 
